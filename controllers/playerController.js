@@ -11,9 +11,10 @@ exports.getPlayerBySearch = async (req, res) => {
         const options = {
             method: "GET",
             headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY},
+            // meta: {"per-page": 100}
         }
 
-        const response = await fetch(`${apiUrl}/players?search=${playerName}`, options)
+        const response = await fetch(`${apiUrl}/players?search=${playerName}&per_page=100`, options)
         const players = await response.json()
 
         console.log('here is players with that name:', players)
