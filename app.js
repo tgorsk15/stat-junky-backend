@@ -17,10 +17,12 @@ require('dotenv').config();
 // )
 
 const homeRouter = require('./routes/home')
+const playerRouter = require('./routes/player')
 
 
 //connect routers:
 app.use("/", homeRouter)
+app.use("/player", playerRouter)
 
 
 const PORT = process.env.PORT || 5000
