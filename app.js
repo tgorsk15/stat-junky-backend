@@ -1,20 +1,23 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 require('dotenv').config();
 
 // app.get("/", (req, res) => res.send("Hello, world!"));
 
-// app.use(express.json())
+app.use(express.json())
 // app.use(express.urlencoded({ extended: true }))
-// app.use(
-//     cors({
-//         origin: [
-//             "http://localhost:5173",
-//             "https://thedailycoder.netlify.app"
-//         ]
-//     })
-// )
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173",
+            
+            // change to new deployment url when ready:
+            // "https://thedailycoder.netlify.app"
+        ]
+    })
+)
 
 const homeRouter = require('./routes/home')
 const playerRouter = require('./routes/player')
