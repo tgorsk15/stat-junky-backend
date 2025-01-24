@@ -8,7 +8,10 @@ const apiUrl = process.env.API_URL
 exports.homeTest = async (req, res) => {
     const teams = await api.nba.getTeams()
     console.log('here is teams:', teams)
-    res.send('Hello Friend')
+    res.json({
+        msg: 'Hello Friend',
+        teams: teams
+    })
 }
 
 
