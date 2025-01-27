@@ -26,3 +26,20 @@ exports.getPlayerBySearch = async (req, res) => {
     }
     
 }
+
+exports.getPlayerStats = async (req, res) => {
+    const playerId = req.params.id
+
+    try {
+        const options = {
+            method: "GET",
+            headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY}
+        }
+
+        // put fetch here
+
+    } catch {
+        console.error('Error getting player stats:', error)
+        res.status(500).json({ error: 'Failed to fetch player stats' })
+    }
+}
