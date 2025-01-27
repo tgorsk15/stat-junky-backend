@@ -4,7 +4,7 @@ const api = new BalldontlieAPI({ apiKey: process.env.API_KEY })
 const apiUrl = process.env.API_URL
 
 exports.getPlayerBySearch = async (req, res) => {
-    const playerName = req.query.search
+    const playerName = req.params.query
     console.log('search query:', playerName)
 
     try {
@@ -17,7 +17,9 @@ exports.getPlayerBySearch = async (req, res) => {
         const players = await response.json()
 
         console.log('here is players with that name:', players)
-        res.send('Hi Anthony')
+        res.json({
+            players: players
+        })
     } catch {
         console.error('Error fetching player:', error)
         res.status(500).json({ error: 'Failed to fetch player data' })
