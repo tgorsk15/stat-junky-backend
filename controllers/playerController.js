@@ -3,7 +3,7 @@ const api = new BalldontlieAPI({ apiKey: process.env.API_KEY })
 
 const apiUrl = process.env.API_URL
 
-exports.getPlayerBySearch = async (req, res) => {
+exports.getPlayersBySearch = async (req, res) => {
     const playerName = req.params.query
     console.log('search query:', playerName)
 
@@ -27,7 +27,9 @@ exports.getPlayerBySearch = async (req, res) => {
     
 }
 
-exports.getPlayerStats = async (req, res) => {
+// build API builder for below function
+
+exports.getPlayerSeasons = async (req, res) => {
     const playerId = req.params.id
 
     try {
@@ -36,7 +38,12 @@ exports.getPlayerStats = async (req, res) => {
             headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY}
         }
 
-        // put fetch here
+        const response = await fetch(`${apiUrl}/stats?player_ids=${15}`)
+        const seasons = await response.json()
+
+        res.json({
+            seasons: seasons
+        })
 
     } catch {
         console.error('Error getting player stats:', error)
