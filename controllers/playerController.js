@@ -28,31 +28,47 @@ exports.getPlayersBySearch = async (req, res) => {
 }
 
 // build API builder for below function
-// exports.getAllSeasons = async () => {
-//     seasons = []
-//     firstYear = 
-// }
+exports.getAllSeasons = async (id, draftYear) => {
+    let seasons = []
+    let currentYear = draftYear
 
-exports.getPlayerSeasons = async (req, res) => {
-    const playerData = req.body
-    console.log(playerData)
     try {
         const options = {
             method: "GET",
             headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY}
         }
 
-        const response = await 
-            fetch(`${apiUrl}/season_averages?season=2022&player_id=${15}`, options)
-        const seasons = await response.json()
-        console.log('here is season data:', seasons)
+        for (let i = 0; i < 15; i++) {
+            const response = await 
+                fetch(`${apiUrl}/season_averages?season=${currentYear}&player_id=${id}`, options)
+            const season = await response.json()
+            seasons.push(season)
+            currentYear += 1
+            if (currentYear == 2025) break
+        }
+        return seasons 
+    } catch(err) {
+        console.error('Error getting season:', currentYear)
+        throw err
+    }
+    
+
+}
+
+exports.getPlayerSeasons = async (req, res) => {
+    const playerData = req.body
+    const {id, draft_year} = playerData
+    console.log(playerData)
+    try {
+        const seasons = await this.getAllSeasons(id, draft_year)
+        console.log('here is the returned seasonal data:', seasons)
 
         res.json({
             seasons: seasons
         })
 
     } catch(error) {
-        console.error('Error getting player stats:', error)
+        console.error('Error getting players stats:', error)
         res.status(500).json({ error: 'Failed to fetch player stats' })
     }
 }
