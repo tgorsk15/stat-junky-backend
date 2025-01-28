@@ -20,7 +20,7 @@ exports.getPlayersBySearch = async (req, res) => {
         res.json({
             players: players
         })
-    } catch {
+    } catch(error) {
         console.error('Error fetching player:', error)
         res.status(500).json({ error: 'Failed to fetch player data' })
     }
@@ -28,24 +28,30 @@ exports.getPlayersBySearch = async (req, res) => {
 }
 
 // build API builder for below function
+// exports.getAllSeasons = async () => {
+//     seasons = []
+//     firstYear = 
+// }
 
 exports.getPlayerSeasons = async (req, res) => {
-    const playerId = req.params.id
-
+    const playerData = req.body
+    console.log(playerData)
     try {
         const options = {
             method: "GET",
             headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY}
         }
 
-        const response = await fetch(`${apiUrl}/stats?player_ids=${15}`)
+        const response = await 
+            fetch(`${apiUrl}/season_averages?season=2022&player_id=${15}`, options)
         const seasons = await response.json()
+        console.log('here is season data:', seasons)
 
         res.json({
             seasons: seasons
         })
 
-    } catch {
+    } catch(error) {
         console.error('Error getting player stats:', error)
         res.status(500).json({ error: 'Failed to fetch player stats' })
     }

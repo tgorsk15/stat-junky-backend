@@ -4,6 +4,6 @@ const playerController = require('../controllers/playerController')
 
 playerRouter.get('/search/:query', playerController.getPlayersBySearch)
 
-playerRouter.get('/seasons/:playerId', playerController.getPlayerSeasons)
+playerRouter.post('/seasons', playerController.getPlayerSeasons)
 
 module.exports = playerRouter
