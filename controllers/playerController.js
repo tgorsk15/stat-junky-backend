@@ -38,11 +38,16 @@ exports.getAllSeasons = async (id, draftYear) => {
             headers: {"Content-Type": "application/json", "Authorization": process.env.API_KEY}
         }
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 23; i++) {
             const response = await 
                 fetch(`${apiUrl}/season_averages?season=${currentYear}&player_id=${id}`, options)
-            const season = await response.json()
-            seasons.push(season)
+            const allSeasons = await response.json()
+            const season = allSeasons.data
+            console.log(season)
+            if (season && season.length > 0) {
+                seasons.push(season)
+            }
+    
             currentYear += 1
             if (currentYear == 2025) break
         }
