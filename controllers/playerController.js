@@ -69,6 +69,7 @@ exports.getPlayerSeasons = async (req, res) => {
         console.log('here is the returned seasonal data:', seasons)
 
         res.json({
+            playerData: playerData,
             seasons: seasons
         })
 
