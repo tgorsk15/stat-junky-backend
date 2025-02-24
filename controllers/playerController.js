@@ -43,7 +43,6 @@ exports.getAllSeasons = async (id, draftYear) => {
                 fetch(`${apiUrl}/season_averages?season=${currentYear}&player_id=${id}`, options)
             const allSeasons = await response.json()
             const season = allSeasons.data
-            console.log(season)
             if (season && season.length > 0) {
                 seasons.push(season)
             }
@@ -63,7 +62,7 @@ exports.getAllSeasons = async (id, draftYear) => {
 exports.getPlayerSeasons = async (req, res) => {
     const playerData = req.body
     const {id, draft_year} = playerData
-    console.log(playerData)
+    console.log('here is overview of player:', playerData)
     try {
         const seasons = await this.getAllSeasons(id, draft_year)
         console.log('here is the returned seasonal data:', seasons)
