@@ -12,7 +12,7 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://stat-junky.netlify.app/"
+            "https://stat-junky.netlify.app"
         ]
     })
 )
