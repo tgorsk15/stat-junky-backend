@@ -62,10 +62,9 @@ exports.getAllSeasons = async (id, draftYear) => {
 exports.getPlayerSeasons = async (req, res) => {
     const playerData = req.body
     const {id, draft_year} = playerData
-    console.log('here is overview of player:', playerData)
+
     try {
         const seasons = await this.getAllSeasons(id, draft_year)
-        console.log('here is the returned seasonal data:', seasons)
 
         res.json({
             playerData: playerData,
