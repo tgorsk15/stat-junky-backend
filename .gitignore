@@ -1,3 +1,5 @@
 .env
 
 EC2sync.txt
+
+node_modules
